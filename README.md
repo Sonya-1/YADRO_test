@@ -32,7 +32,7 @@ cd YADRO_test
 
 
 ```
-g++ -o main main.cpp
+g++ -o main main.cpp Club.cpp
 ```
 
 
