@@ -47,7 +47,6 @@ g++ -o main main.cpp
 
 ```
 ./main file.txt
-
 ```
 
 
