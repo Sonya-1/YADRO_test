@@ -138,8 +138,9 @@ void read_file(string file_name, info& inf, vector<action>& actions) {
 
 int main(int argc, char *argv[]) {
 
-    if (argc < 1) {
+    if (argc < 2) {
 	    cout << "not enough arguments to call" << endl;
+	    exit(1);
 	}
 	string filename = argv[1];
 	info inf;
