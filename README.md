@@ -11,9 +11,7 @@
 
 
 ```
-
 git clone https://github.com/Sonya-1/YADRO_test
-
 ```
 
 
