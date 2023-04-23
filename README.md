@@ -20,9 +20,7 @@ git clone https://github.com/Sonya-1/YADRO_test
 
 
 ```
-
 cd YADRO_test
-
 ```
 
 
@@ -34,9 +32,7 @@ cd YADRO_test
 
 
 ```
-
 g++ -o main main.cpp
-
 ```
 
 
@@ -50,7 +46,6 @@ g++ -o main main.cpp
 
 
 ```
-
 ./main file.txt
 
 ```
