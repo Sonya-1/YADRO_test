@@ -27,7 +27,7 @@ bool check_int(string& d) {
 	}
 }
 
-int parse_time(string time) {
+int parse_time(string& time) {
 	string h;
 	h.push_back(time.at(0));
 	h.push_back(time.at(1));
