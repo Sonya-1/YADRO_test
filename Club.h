@@ -11,6 +11,7 @@
 #include <vector>
 #include <exception>
 #include <algorithm> 
+#include "TimeUtility.h"
 using namespace std;
 
 struct info {
@@ -45,16 +46,6 @@ struct client {
 	}
 };
 
-static string time_format(int time) {
-	string time_string = "";
-	int hour = time / 60;
-	time_string += (hour < 10 ? "0" : "") + to_string(hour);
-	time_string += ":";
-	int minutes = time % 60;
-	time_string += (minutes < 10 ? "0" : "") + to_string(minutes);
-	return time_string;
-}
-
 struct action {
 	int time = 0;
 	int act = 0;
@@ -62,7 +53,8 @@ struct action {
 	int computer = 0;
 
 	void print_action() {
-		cout << time_format(time) << " ";
+		TimeUtility tu;
+		cout << tu.time_format(time) << " ";
 		cout << act << " ";
 		cout << client_name << " ";
 		if (computer != 0) {

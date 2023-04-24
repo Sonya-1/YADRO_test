@@ -68,13 +68,14 @@ client* Club::find_client(string& client_name) {
 }
 
 void Club::client_came(action& curr_action) {
+	TimeUtility tu;
 
 	if (curr_action.time < inf.time_start) {
-		cout << time_format(curr_action.time) << " 13 NotOpenYet" << endl;
+		cout << tu.time_format(curr_action.time) << " 13 NotOpenYet" << endl;
 		return;
 	}
 	if (client_in_club(curr_action.client_name)) {
-		cout << time_format(curr_action.time) << " 13 YouShallNotPass" << endl;
+		cout << tu.time_format(curr_action.time) << " 13 YouShallNotPass" << endl;
 		return;
 	}
 	clients.push_back(curr_action.client_name);
@@ -82,16 +83,17 @@ void Club::client_came(action& curr_action) {
 
 void Club::client_sat_table(action& curr_action) {
 	client* clt;
+	TimeUtility tu;
 
 	if (client_in_club(curr_action.client_name)) {
 		clt = find_client(curr_action.client_name);
 	}
 	else {
-		cout << time_format(curr_action.time) << " 13 ClientUnknown" << endl;
+		cout << tu.time_format(curr_action.time) << " 13 ClientUnknown" << endl;
 		return;
 	}
 	if ((clt->computer == curr_action.computer) || (tables[curr_action.computer] == 1)) {
-		cout << time_format(curr_action.time) << " 13 PlaceIsBusy" << endl;
+		cout << tu.time_format(curr_action.time) << " 13 PlaceIsBusy" << endl;
 		return;
 	}
 	if (clt->computer != 0) {
@@ -108,13 +110,14 @@ void Club::client_sat_table(action& curr_action) {
 
 void Club::client_wait(action& curr_action) {
 	queue.push_back(curr_action.client_name);
+	TimeUtility tu;
 
 	if (busy_tables() < (tables.size() - 1)) {
-		cout << time_format(curr_action.time) << " 13 ICanWaitNoLonger!" << endl;
+		cout << tu.time_format(curr_action.time) << " 13 ICanWaitNoLonger!" << endl;
 		return;
 	}
 	if (queue.size() > (tables.size() - 1)) {
-		cout << time_format(curr_action.time) << " 11 " << curr_action.client_name << endl;
+		cout << tu.time_format(curr_action.time) << " 11 " << curr_action.client_name << endl;
 		remove_client(queue, curr_action.client_name);
 		remove_client(clients, curr_action.client_name);
 		return;
@@ -123,12 +126,13 @@ void Club::client_wait(action& curr_action) {
 
 void Club::client_left(action& curr_action) {
 	client* clt;
+	TimeUtility tu;
 
 	if (client_in_club(curr_action.client_name)) {
 		clt = find_client(curr_action.client_name);
 	}
 	else {
-		cout << time_format(curr_action.time) << " 13 ClientUnknown" << endl;
+		cout << tu.time_format(curr_action.time) << " 13 ClientUnknown" << endl;
 		return;
 	}
 	int comp = clt->computer;
@@ -139,16 +143,17 @@ void Club::client_left(action& curr_action) {
 	if (queue.size() != 0) {
 		set_to_computer(queue[0].name, comp, curr_action);
 		tables[queue[0].computer] = 1;
-		cout << time_format(curr_action.time) << " 12 " << queue[0].name << " " << comp << endl;
+		cout << tu.time_format(curr_action.time) << " 12 " << queue[0].name << " " << comp << endl;
 		remove_client(queue, queue[0].name);
 	}
 }
 
 void Club::close_club() {
 	sort(clients.begin(), clients.end(), compare);
+	TimeUtility tu;
 
 	for (int i = 0; i < clients.size(); i++) {
-		cout << time_format(inf.time_end) << " 11 " << clients[i].name << endl;
+		cout << tu.time_format(inf.time_end) << " 11 " << clients[i].name << endl;
 		tables[clients[i].computer] = 0;
 		client_left_table(clients[i].name, inf.time_end);
 	}
@@ -159,6 +164,7 @@ void Club::count_revenue() {
 	int time = 0;
 	int h = 0;
 	int m = 0;
+	TimeUtility tu;
 
 	for (int i = 0; i < wp.size(); i++) {
 		time = wp[i].time_end - wp[i].time_start;
@@ -172,12 +178,13 @@ void Club::count_revenue() {
 		wp_time[wp[i].table] += time;
 	}
 	for (int i = 1; i < tables.size(); i++) {
-		cout << i << " " << tables[i] << " " << time_format(wp_time[i]) << endl;;
+		cout << i << " " << tables[i] << " " << tu.time_format(wp_time[i]) << endl;;
 	}
 }
 
 void Club::club_work() {
-	cout << time_format(inf.time_start) << endl;
+	TimeUtility tu;
+	cout << tu.time_format(inf.time_start) << endl;
 
 	for (int i = 0; i < actions.size(); i++) {
 		actions[i].print_action();
@@ -196,6 +203,6 @@ void Club::club_work() {
 		}
 	}
 	close_club();
-	cout << time_format(inf.time_end) << endl;
+	cout << tu.time_format(inf.time_end) << endl;
 	count_revenue();
 }
