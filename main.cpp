@@ -8,7 +8,7 @@
 using namespace std;
 
 bool check_time(string& time) {
-	const regex pattern("([01][0-9]|2[0-3]):[0-5][0-9]");
+	const regex pattern("^([01][0-9]|2[0-3]):[0-5][0-9]$");
 	if (regex_match(time, pattern)) {
 		return true;
 	}
@@ -18,7 +18,7 @@ bool check_time(string& time) {
 }
 
 bool check_int(string& d) {
-	const regex pattern("[0-9]+");
+	const regex pattern("^[0-9]+$");
 	if (regex_match(d, pattern)) {
 		return true;
 	}
@@ -38,7 +38,7 @@ int parse_time(string time) {
 }
 
 void check_parse_action(string& act, action& action_struct, info& inf) {
-	const regex pattern(R"((([01][0-9]|2[0-3]):([0-5][0-9]))\s([0-9])\s([-_a-z0-9]+)(\s([0-9]+))?)");
+	const regex pattern(R"(^(([01][0-9]|2[0-3]):([0-5][0-9]))\s([0-9])\s([-_a-z0-9]+)(\s([0-9]+))?$)");
 	if (regex_match(act, pattern)) {
 		smatch m;
 		regex_search(act, m, pattern);
@@ -96,9 +96,9 @@ void read_file(string file_name, info& inf, vector<action>& actions) {
 	}
 	else {
 		input.close();
-		throw (time1);
+		throw (time + time1);
 	}
-
+	
 	input >> pr;
 	if (check_int(pr)) {
 		inf.price = stoi(pr);
@@ -136,18 +136,13 @@ void read_file(string file_name, info& inf, vector<action>& actions) {
 	input.close();
 }
 
-int main(int argc, char *argv[]) {
-
-    if (argc < 2) {
-	    cout << "not enough arguments to call" << endl;
-	    exit(1);
-	}
-	string filename = argv[1];
+int main() {
 	info inf;
 	vector<action> actions;
 	
 	try {
-		read_file(filename, inf, actions);
+		read_file("c:/tmp/test_input.txt", inf, actions);
+		//read_file("c:/tmp/file5.txt", inf, actions);
 	}
 	catch (string& e) {
 		cerr << e << endl;
