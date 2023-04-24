@@ -178,7 +178,7 @@ g++ -o main main.cpp Club.cpp TimeUtility.cpp
 ![Image alt](https://github.com/Sonya-1/YADRO_test/blob/main/img/6.png)
 
 
-'file6' - Проверка очередности входящих событий
+`file6` - Проверка очередности входящих событий
 
 Результат:
 
