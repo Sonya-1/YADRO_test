@@ -118,7 +118,7 @@ g++ -o main main.cpp Club.cpp TimeUtility.cpp
 
 
 
-`file3` - Проверка входных данных
+`file3` - Проверка формата времени в событии
 
 Результат:
 
@@ -176,3 +176,10 @@ g++ -o main main.cpp Club.cpp TimeUtility.cpp
 Результат:
 
 ![Image alt](https://github.com/Sonya-1/YADRO_test/blob/main/img/6.png)
+
+
+'file6' - Проверка очередности входящих событий
+
+Результат:
+
+![Image alt](https://github.com/Sonya-1/YADRO_test/blob/main/img/7.png)
