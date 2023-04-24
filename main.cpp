@@ -136,13 +136,18 @@ void read_file(string file_name, info& inf, vector<action>& actions) {
 	input.close();
 }
 
-int main() {
+int main(int argc, char *argv[]) {
+
+    if (argc < 2) {
+	    cout << "not enough arguments to call" << endl;
+	    exit(1);
+	}
+	string filename = argv[1];
 	info inf;
 	vector<action> actions;
 	
 	try {
-		read_file("c:/tmp/test_input.txt", inf, actions);
-		//read_file("c:/tmp/file5.txt", inf, actions);
+		read_file(filename, inf, actions);
 	}
 	catch (string& e) {
 		cerr << e << endl;
